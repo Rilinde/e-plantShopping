@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './ProductList.css';
 import CartItem from './CartItem';
+import { useDispatch } from 'react-redux';
+import { addItem } from './CartSlice';
 
 function ProductList({ onHomeClick }) {
   const [showCart, setShowCart] = useState(false);
+  const dispatch = useDispatch();
 
   const plantsArray = [
     {
@@ -34,11 +37,7 @@ function ProductList({ onHomeClick }) {
       plants: [
         {
           name: "Lavender",
-<<<<<<< HEAD
-          image: "https://images.unsplash.com/photo-1611909023032-2d6b3134ecba",
-=======
           image: "https://cdn.pixabay.com/photo/2019/04/07/20/20/hyacinth-4110726_1280.jpg",
->>>>>>> 51970cd (fixed product list rendering)
           description: "Calming scent used in aromatherapy.",
           cost: "$20"
         },
@@ -57,26 +56,6 @@ function ProductList({ onHomeClick }) {
       ]
     }
   ];
-
-  const styleObj = {
-    backgroundColor: '#4CAF50',
-    color: '#fff',
-    padding: '15px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  };
-
-  const styleA = {
-    color: 'white',
-    fontSize: '22px',
-<<<<<<< HEAD
-    textDecoration: 'none'
-=======
-    textDecoration: 'none',
-    marginLeft: '20px'
->>>>>>> 51970cd (fixed product list rendering)
-  };
 
   const handleHomeClick = (e) => {
     e.preventDefault();
@@ -100,77 +79,43 @@ function ProductList({ onHomeClick }) {
 
   return (
     <div>
-<<<<<<< HEAD
       {/* NAVBAR */}
-      <div className="navbar" style={styleObj}>
-        <div>
-          <a href="/" onClick={handleHomeClick} style={styleA}>
-            Paradise Nursery
-=======
-      <div className="navbar" style={styleObj}>
+      <div className="navbar">
         <div className="tag">
           <a href="/" onClick={handleHomeClick} className="tag_home_link">
             <h3>Paradise Nursery</h3>
             <i>Where Green Meets Serenity</i>
->>>>>>> 51970cd (fixed product list rendering)
           </a>
         </div>
 
         <div>
-          <a href="#" onClick={handlePlantsClick} style={styleA}>
-            Plants
-          </a>
-<<<<<<< HEAD
-          {'  '}
-=======
->>>>>>> 51970cd (fixed product list rendering)
-          <a href="#" onClick={handleCartClick} style={styleA}>
-            🛒
-          </a>
+          <a href="#" onClick={handlePlantsClick} className="nav-link">Plants</a>
+          <a href="#" onClick={handleCartClick} className="nav-link">🛒</a>
         </div>
       </div>
 
-<<<<<<< HEAD
       {/* PRODUCTS */}
-=======
->>>>>>> 51970cd (fixed product list rendering)
       {!showCart ? (
         <div className="product-grid">
           {plantsArray.map((item, index) => (
             <div key={index}>
-<<<<<<< HEAD
-              <h2 className="plant_heading">{item.category}</h2>
-
-              <div className="product-list">
-                {item.plants.map((plant, i) => (
-                  <div key={i} className="product-card">
-=======
               <div className="plantname_heading">
                 <h2 className="plant_heading">{item.category}</h2>
               </div>
 
               <div className="product-list">
-                {item.plants.map((plant, plantIndex) => (
-                  <div key={plantIndex} className="product-card">
->>>>>>> 51970cd (fixed product list rendering)
-                    <img
-                      src={plant.image}
-                      alt={plant.name}
-                      className="product-image"
-                    />
-<<<<<<< HEAD
-                    <h3>{plant.name}</h3>
-                    <p>{plant.description}</p>
-                    <p>{plant.cost}</p>
-                    <button className="product-button">
-                      Add to Cart
-                    </button>
-=======
+                {item.plants.map((plant, i) => (
+                  <div key={i} className="product-card">
+                    <img src={plant.image} alt={plant.name} className="product-image" />
                     <h3 className="product-title">{plant.name}</h3>
                     <p>{plant.description}</p>
                     <p className="product-price">{plant.cost}</p>
-                    <button className="product-button">Add to Cart</button>
->>>>>>> 51970cd (fixed product list rendering)
+                    <button
+                      className="product-button"
+                      onClick={() => dispatch(addItem(plant))}
+                    >
+                      Add to Cart
+                    </button>
                   </div>
                 ))}
               </div>

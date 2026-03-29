@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import './ProductList.css';
 import CartItem from './CartItem';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CartSlice';
 
 function ProductList({ onHomeClick }) {
   const [showCart, setShowCart] = useState(false);
   const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
 
   const plantsArray = [
     {
@@ -57,6 +58,8 @@ function ProductList({ onHomeClick }) {
     }
   ];
 
+  const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+
   const handleHomeClick = (e) => {
     e.preventDefault();
     onHomeClick();
@@ -77,9 +80,12 @@ function ProductList({ onHomeClick }) {
     setShowCart(false);
   };
 
+  const isAddedToCart = (plantName) => {
+    return cartItems.some((item) => item.name === plantName);
+  };
+
   return (
     <div>
-      {/* NAVBAR */}
       <div className="navbar">
         <div className="tag">
           <a href="/" onClick={handleHomeClick} className="tag_home_link">
@@ -89,12 +95,15 @@ function ProductList({ onHomeClick }) {
         </div>
 
         <div>
-          <a href="#" onClick={handlePlantsClick} className="nav-link">Plants</a>
-          <a href="#" onClick={handleCartClick} className="nav-link">🛒</a>
+          <a href="#" onClick={handlePlantsClick} className="nav-link">
+            Plants
+          </a>
+          <a href="#" onClick={handleCartClick} className="nav-link">
+            🛒 {totalQuantity}
+          </a>
         </div>
       </div>
 
-      {/* PRODUCTS */}
       {!showCart ? (
         <div className="product-grid">
           {plantsArray.map((item, index) => (
@@ -106,15 +115,23 @@ function ProductList({ onHomeClick }) {
               <div className="product-list">
                 {item.plants.map((plant, i) => (
                   <div key={i} className="product-card">
-                    <img src={plant.image} alt={plant.name} className="product-image" />
+                    <img
+                      src={plant.image}
+                      alt={plant.name}
+                      className="product-image"
+                    />
                     <h3 className="product-title">{plant.name}</h3>
                     <p>{plant.description}</p>
                     <p className="product-price">{plant.cost}</p>
                     <button
                       className="product-button"
                       onClick={() => dispatch(addItem(plant))}
+                      disabled={isAddedToCart(plant.name)}
+                      style={{
+                        backgroundColor: isAddedToCart(plant.name) ? 'gray' : ''
+                      }}
                     >
-                      Add to Cart
+                      {isAddedToCart(plant.name) ? 'Added to Cart' : 'Add to Cart'}
                     </button>
                   </div>
                 ))}

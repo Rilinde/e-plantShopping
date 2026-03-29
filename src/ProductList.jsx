@@ -266,9 +266,9 @@ function ProductList({ onHomeClick }) {
               alt="Paradise Nursery Logo"
             />
             <a href="/" onClick={handleHomeClick}>
-              <div>
-                <h3 style={{ color: 'white' }}>Paradise Nursery</h3>
-                <i style={{ color: 'white' }}>Where Green Meets Serenity</i>
+              <div className="tag_home_link">
+                <h3>Paradise Nursery</h3>
+                <i>Where Green Meets Serenity</i>
               </div>
             </a>
           </div>
@@ -283,7 +283,12 @@ function ProductList({ onHomeClick }) {
           <div>
             <a href="#" onClick={handleCartClick} style={styleA}>
               <h1 className="cart">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" height="68" width="68">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 256 256"
+                  height="68"
+                  width="68"
+                >
                   <rect width="156" height="156" fill="none"></rect>
                   <circle cx="80" cy="216" r="12"></circle>
                   <circle cx="184" cy="216" r="12"></circle>
@@ -305,16 +310,23 @@ function ProductList({ onHomeClick }) {
       {!showCart ? (
         <div className="product-grid">
           {plantsArray.map((item, index) => (
-            <div key={index} className="plant-category">
-              <h2 className="plant-category-title">{item.category}</h2>
-              <div className="plants-container">
+            <div key={index}>
+              <div className="plantname_heading">
+                <h2 className="plant_heading">{item.category}</h2>
+              </div>
+
+              <div className="product-list">
                 {item.plants.map((plant, plantIndex) => (
-                  <div key={plantIndex} className="plant-card">
-                    <img src={plant.image} alt={plant.name} className="plant-image" />
-                    <h3>{plant.name}</h3>
+                  <div key={plantIndex} className="product-card">
+                    <img
+                      src={plant.image}
+                      alt={plant.name}
+                      className="product-image"
+                    />
+                    <h3 className="product-title">{plant.name}</h3>
                     <p>{plant.description}</p>
-                    <p>{plant.cost}</p>
-                    <button className="add-to-cart-btn">Add to Cart</button>
+                    <p className="product-price">{plant.cost}</p>
+                    <button className="product-button">Add to Cart</button>
                   </div>
                 ))}
               </div>

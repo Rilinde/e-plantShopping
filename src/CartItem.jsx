@@ -32,6 +32,10 @@ const CartItem = ({ onContinueShopping }) => {
     dispatch(removeItem(item.name));
   };
 
+  const handleCheckoutShopping = (e) => {
+    alert('Coming Soon');
+  };
+
   const calculateTotalCost = (item) => {
     return (getNumericCost(item.cost) * item.quantity).toFixed(2);
   };
@@ -89,7 +93,9 @@ const CartItem = ({ onContinueShopping }) => {
           Continue Shopping
         </button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+        <button className="get-started-button1" onClick={handleCheckoutShopping}>
+          Checkout
+        </button>
       </div>
     </div>
   );

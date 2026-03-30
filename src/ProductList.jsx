@@ -55,6 +55,29 @@ function ProductList({ onHomeClick }) {
           cost: "$15"
         }
       ]
+    },
+    {
+      category: "Medicinal Plants",
+      plants: [
+        {
+          name: "Aloe Vera",
+          image: "https://cdn.pixabay.com/photo/2017/02/01/22/02/aloe-vera-2034828_1280.jpg",
+          description: "Known for healing properties.",
+          cost: "$10"
+        },
+        {
+          name: "Tulsi",
+          image: "https://cdn.pixabay.com/photo/2020/05/26/14/01/tulsi-5225717_1280.jpg",
+          description: "Boosts immunity and wellness.",
+          cost: "$14"
+        },
+        {
+          name: "Chamomile",
+          image: "https://cdn.pixabay.com/photo/2016/08/19/19/48/flowers-1606041_1280.jpg",
+          description: "Often used for calming and relaxation.",
+          cost: "$11"
+        }
+      ]
     }
   ];
 
@@ -76,8 +99,7 @@ function ProductList({ onHomeClick }) {
   };
 
   const handleContinueShopping = (e) => {
-    e.preventDefault();
-    setShowCart(false);
+    onContinueShopping(e);
   };
 
   const isAddedToCart = (plantName) => {
